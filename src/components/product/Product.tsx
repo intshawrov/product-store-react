@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { ProductType } from "../../typs"
 import './prodect.css'
 
@@ -7,7 +8,11 @@ export interface ProductProps {
 
 export default function Product({ product }: ProductProps) {
 
-    console.log(product);
+    const [addCart , setAddCart] = useState(false);
+    const handleAddCart =()=>{
+        setAddCart(!addCart)
+    }
+
 
 
     return (
@@ -25,13 +30,12 @@ export default function Product({ product }: ProductProps) {
                         <p className="product-description">{product.description}</p>
 
                         <div className="product-rating">
-                            <span className="stars">★ {product.rating.rate}</span>
-                            <span className="rating-count">({product.rating.count} reviews)</span>
+                            <button className="btn">Add to cart</button>
                         </div>
 
                         <div className="product-footer">
                             <span className="product-price">${product.price.toFixed(2)}</span>
-                            <button className="add-to-cart-btn">Add to Cart</button>
+                            <button onClick={handleAddCart} className="add-to-cart-btn">{addCart ? "Added": "Add to cart"}</button>
                         </div>
                     </div>
                 </div>
